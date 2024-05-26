@@ -42,6 +42,46 @@ public class ArbolBinario {
         }
     }
 
+    public void visualizarConDireccion() {
+        System.out.println("Empleados con dirección:");
+        visualizarConDireccion(raiz);
+    }
+
+    private void visualizarConDireccion(Nodo raiz) {
+        if (raiz != null) {
+            if (!raiz.getEmployee().getDirection().isEmpty()) {
+                System.out.println(raiz.getEmployee());
+            }
+            visualizarConDireccion(raiz.getIzquierdo());
+            visualizarConDireccion(raiz.getDerecho());
+        }
+    }
+
+    public void visualizarSinDireccion() {
+        System.out.println("Empleados sin dirección:");
+        visualizarSinDireccion(raiz);
+    }
+
+    private void visualizarSinDireccion(Nodo raiz) {
+        if (raiz != null) {
+            if (raiz.getEmployee().getDirection().isEmpty()) {
+                System.out.println(raiz.getEmployee());
+            }
+            visualizarSinDireccion(raiz.getIzquierdo());
+            visualizarSinDireccion(raiz.getDerecho());
+        }
+    }
+
+    public boolean existeAfiliacion(Nodo raiz, int afiliacion) {
+        if (raiz == null) {
+            return false;
+        }
+        if (raiz.getEmployee().getAfiliation() == afiliacion) {
+            return true;
+        }
+        return existeAfiliacion(raiz.getIzquierdo(), afiliacion) || existeAfiliacion(raiz.getDerecho(), afiliacion);
+    }
+
     public void visualizarRecorridos() {
         System.out.println("Preorden");
         preorden(raiz);
@@ -52,6 +92,11 @@ public class ArbolBinario {
     }
 
     public void insertarNodo(Nodo raiz, Employee employee) {
+        if (existeAfiliacion(this.raiz, employee.getAfiliation())) {
+            System.out.println("El número de afiliación ya existe: " + employee.getAfiliation());
+            return;
+        }
+
         if (validarRaiz()) {
             if (employee.getAfiliation() < raiz.getEmployee().getAfiliation()) {
                 if (raiz.getIzquierdo() == null) {
