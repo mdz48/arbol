@@ -1,4 +1,5 @@
 import models.ArbolBinario;
+import models.Archivo;
 import models.Employee;
 import models.Nodo;
 
@@ -12,7 +13,7 @@ public class Main {
 
         int opc;
         do {
-            System.out.println("1. Agregar nodos\n2. Imprimir recorridos\n3. Ver empleados con dirección\n4. Ver empleados sin dirección\n5. Salir");
+            System.out.println("1. Agregar nodos\n2. Imprimir recorridos\n3. Ver empleados con dirección\n4. Ver empleados sin dirección\n5. Guardar en archivo\n6. Salir\nSeleccione la opción: ");
             opc = entrada.nextInt();
             entrada.nextLine();
             switch (opc) {
@@ -36,19 +37,26 @@ public class Main {
                 case 4:
                     arbol.visualizarSinDireccion();
                     break;
+                case 5:
+                    Archivo archivo = new Archivo();
+                    archivo.escribirInformacion(arbol, "empleados.txt");
+                    System.out.println("Información guardada en empleados.txt");
+                    break;
             }
-        } while (opc != 5);
+        } while (opc != 6);
     }
 
     public static void initialize(ArbolBinario arbol){
-        Employee rootEmployee = new Employee("Primero", 123, "Primero");
+        Employee rootEmployee = new Employee("Luna", 122313, "Albania Baja");
         Nodo rootNode = new Nodo(rootEmployee);
         arbol.setRaiz(rootNode);
-        Employee emp1 = new Employee("Mario", 233306, "Segundo");
-        Employee emp2 = new Employee("Capiña", 233500, "");
-        Employee emp3 = new Employee("Cerezaso", 233503, "Cuarto");
+        Employee emp1 = new Employee("Mario", 233306, "Albania Alta");
+        Employee emp2 = new Employee("Leonardo", 233500, "");
+        Employee emp3 = new Employee("Juan", 233503, "Los Pájaros");
+        Employee emp4 = new Employee("Pedro", 300123, "");
         arbol.insertarNodo(arbol.getRaiz(), emp1);
         arbol.insertarNodo(arbol.getRaiz(), emp2);
         arbol.insertarNodo(arbol.getRaiz(), emp3);
+        arbol.insertarNodo(arbol.getRaiz(), emp4);
     }
 }

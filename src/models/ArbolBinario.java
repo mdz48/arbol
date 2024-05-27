@@ -15,7 +15,9 @@ public class ArbolBinario {
     }
 
     public boolean validarRaiz() {
-        return raiz != null && raiz.getEmployee() != null;
+        if (raiz.getEmployee() != null)
+            return true;
+        return false;
     }
 
     public void preorden(Nodo raiz) {
@@ -91,32 +93,31 @@ public class ArbolBinario {
         postorden(raiz);
     }
 
-    public void insertarNodo(Nodo raiz, Employee employee) {
-        if (existeAfiliacion(this.raiz, employee.getAfiliation())) {
+    public void insertarNodo(Nodo nodo, Employee employee) {
+        if (existeAfiliacion(raiz, employee.getAfiliation())) {
             System.out.println("El número de afiliación ya existe: " + employee.getAfiliation());
-            return;
-        }
-
-        if (validarRaiz()) {
-            if (employee.getAfiliation() < raiz.getEmployee().getAfiliation()) {
-                if (raiz.getIzquierdo() == null) {
-                    Nodo nodoNuevo = new Nodo(employee);
-                    raiz.setIzquierdo(nodoNuevo);
+        } else {
+            if (validarRaiz()) {
+                if (employee.getAfiliation() < nodo.getEmployee().getAfiliation()) {
+                    if (nodo.getIzquierdo() == null) {
+                        Nodo nodoNuevo = new Nodo(employee);
+                        nodo.setIzquierdo(nodoNuevo);
+                    } else {
+                        insertarNodo(nodo.getIzquierdo(), employee);
+                    }
+                } else if (employee.getAfiliation() > nodo.getEmployee().getAfiliation()) {
+                    if (nodo.getDerecho() == null) {
+                        Nodo nodoNuevo = new Nodo(employee);
+                        nodo.setDerecho(nodoNuevo);
+                    } else {
+                        insertarNodo(nodo.getDerecho(), employee);
+                    }
                 } else {
-                    insertarNodo(raiz.getIzquierdo(), employee);
-                }
-            } else if (employee.getAfiliation() > raiz.getEmployee().getAfiliation()) {
-                if (raiz.getDerecho() == null) {
-                    Nodo nodoNuevo = new Nodo(employee);
-                    raiz.setDerecho(nodoNuevo);
-                } else {
-                    insertarNodo(raiz.getDerecho(), employee);
+                    System.out.println("Ya existe");
                 }
             } else {
-                System.out.println("Ya existe");
+                System.out.println("Falta definir la raíz");
             }
-        } else {
-            System.out.println("Falta definir la raíz");
         }
     }
 }
