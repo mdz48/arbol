@@ -13,7 +13,7 @@ public class Main {
 
         int opc;
         do {
-            System.out.println("1. Agregar nodos\n2. Imprimir recorridos\n3. Ver empleados con dirección\n4. Ver empleados sin dirección\n5. Guardar en archivo\n6. Salir\nSeleccione la opción: ");
+            System.out.println("1. Agregar nodos\n2. Imprimir recorridos\n3. Ver empleados con dirección\n4. Ver empleados sin dirección\n5. Guardar en archivo\n6. Busqueda \n 7. Salir \nSeleccione la opción: ");
             opc = entrada.nextInt();
             entrada.nextLine();
             switch (opc) {
@@ -42,8 +42,16 @@ public class Main {
                     archivo.escribirInformacion(arbol, "empleados.txt");
                     System.out.println("Información guardada en empleados.txt");
                     break;
+                case 6:
+                    System.out.println("Ingresa el numero de afiliación a buscar");
+                    if (arbol.busqueda(arbol.getRaiz(), entrada.nextInt())){
+                        System.out.println("Se encontró");
+                    } else {
+                        System.out.println("No existe");
+                    }
+
             }
-        } while (opc != 6);
+        } while (opc != 7);
     }
 
     public static void initialize(ArbolBinario arbol){

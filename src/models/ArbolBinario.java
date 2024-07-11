@@ -84,6 +84,16 @@ public class ArbolBinario {
         return existeAfiliacion(raiz.getIzquierdo(), afiliacion) || existeAfiliacion(raiz.getDerecho(), afiliacion);
     }
 
+    public boolean busqueda(Nodo raiz, int dato) {
+        if (raiz == null) {
+            return false;
+        }
+        if (raiz.getEmployee().getAfiliation() == dato) {
+            return true;
+        }
+        return busqueda(raiz.getIzquierdo(), dato) || busqueda(raiz.getDerecho(), dato);
+    }
+
     public void visualizarRecorridos() {
         System.out.println("Preorden");
         preorden(raiz);
